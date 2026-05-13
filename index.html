@@ -1,298 +1,242 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mark Fortuito — Developer</title>
-
-  <meta name="description" content="Mark Fortuito — Developer who loves vibe coding. Building systems, apps, and tools with purpose and passion.">
-  <meta property="og:title" content="Mark Fortuito — Developer">
-  <meta property="og:description" content="Building systems, apps, and tools with purpose and passion. Check out my portfolio.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://markfortuito.vercel.app">
-  <meta property="og:image" content="https://markfortuito.vercel.app/assets/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mark Fortuito — Developer">
-  <meta name="twitter:description" content="Building systems, apps, and tools with purpose and passion.">
-
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23111'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='monospace' font-weight='bold' fill='%23c8f135'>MF</text></svg>">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-
-  <style>
-    html { scroll-behavior: smooth; }
-    body {
-      opacity: 0;
-      animation: pageFadeIn 0.5s ease 0.1s forwards;
-    }
-    @keyframes pageFadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .nav-links a.active { color: #c8f135; }
-    .project-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-    }
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      cursor: zoom-out;
-    }
-    #lightbox.open { display: flex; }
-    #lightbox img {
-      max-width: 90vw;
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 0 60px rgba(0,0,0,0.8);
-    }
-    #lightbox-close {
-      position: fixed;
-      top: 20px;
-      right: 28px;
-      color: #fff;
-      font-size: 2rem;
-      cursor: pointer;
-      z-index: 10000;
-      background: none;
-      border: none;
-      line-height: 1;
-    }
-    #back-to-top {
-      position: fixed;
-      bottom: 40px;
-      right: 40px;
-      width: 44px;
-      height: 44px;
-      background: var(--accent, #c8f135);
-      color: #090909;
-      border: none;
-      font-size: 20px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 500;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s;
-      pointer-events: none;
-    }
-    #back-to-top.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    #back-to-top:hover { background: #fff; }
-
-    @media (max-width: 768px) {
-      #back-to-top { bottom: 24px; right: 24px; }
-    }
-  </style>
-</head>
-<body>
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-  <div id="loader">
-    <div class="loader-initials">M<span>F</span></div>
-    <div class="loader-bar"></div>
+<section id="projects">
+  <div class="section-label">02 &mdash; Projects</div>
+  <div class="projects-intro reveal">
+    <h2 class="projects-heading">Selected<br>Work</h2>
+    <div class="projects-count">
+      <span id="repoCount">7</span>
+      public repos
+    </div>
   </div>
-  <nav id="nav">
-    <a href="#hero" class="nav-logo">mark<span>.</span>dev</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#journey">Journey</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-  <div id="lightbox">
-    <button id="lightbox-close">✕</button>
-    <img id="lightbox-img" src="" alt="Preview">
+  <div class="project-filters reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="desktop">Desktop</button>
+    <button class="filter-btn" data-filter="web">Web</button>
+    <button class="filter-btn" data-filter="personal">Personal</button>
   </div>
-  <button id="back-to-top" aria-label="Back to top">↑</button>
-  <div id="hero-slot"></div>
-  <div id="about-slot"></div>
-  <div id="projects-slot"></div>
-  <div id="skills-slot"></div>
-  <div id="journey-slot"></div>
-  <div id="contact-slot"></div>
-  <footer>
-    <div class="footer-copy">© 2026 Mark Fortuito. All rights reserved.</div>
-    <div class="footer-tag">Built with <span>love</span> & vibe coding.</div>
-  </footer>
 
-  <script>
-    const sections = ['hero', 'about', 'projects', 'skills', 'journey', 'contact'];
-    let loaded = 0;
+  <div class="projects-grid reveal">
 
-    sections.forEach(name => {
-      fetch(`sections/${name}.html`)
-        .then(r => r.text())
-        .then(html => {
-          const slot = document.getElementById(name + '-slot');
-          slot.outerHTML = html;
-          loaded++;
-          if (loaded === sections.length) initScripts();
-        })
-        .catch(err => {
-          console.error(`Failed to load: ${name}`, err);
-          loaded++;
-          if (loaded === sections.length) initScripts();
-        });
-    });
+    <div class="projects-row-top">
+      <div class="project-card" data-type="desktop">
+        <div class="project-carousel">
+          <div class="carousel-track">
+            <img src="assets/projects/Screenshot 2026-05-13 173710.png" alt="Voting Management System">
+            <img src="assets/projects/Screenshot 2026-05-13 173719.png" alt="Voting Management System">
+            <img src="assets/projects/Screenshot 2026-05-13 173832.png" alt="Voting Management System">
+          </div>
+          <button class="carousel-btn prev">&#8249;</button>
+          <button class="carousel-btn next">&#8250;</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="project-num">01</div>
+        <div class="project-name">Voting Management System</div>
+        <div class="project-case">
+          <div class="case-block">
+            <span class="case-label">Problem</span>
+            <span class="case-val">QCU needed a faster, more reliable way to run student elections</span>
+          </div>
+          <div class="case-block">
+            <span class="case-label">What I built</span>
+            <span class="case-val">JavaFX desktop app with voter registration, ballot management, and live results</span>
+          </div>
+          <div class="case-block">
+            <span class="case-label">Result</span>
+            <span class="case-val">Fully functional election system with MySQL-backed audit trail</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-lang" id="lang-0">—</div>
+          <a href="https://github.com/fortuitomark28/VOTING-MANAGEMENT-SYSTEM-2025" target="_blank" class="project-arrow">↗</a>
+        </div>
+      </div>
+      <div class="project-card" data-type="desktop">
+        <div class="project-carousel">
+          <div class="carousel-track">
+            <img src="assets/projects/Screenshot 2026-05-13 172624.png" alt="HealTap System">
+            <img src="assets/projects/Screenshot 2026-05-13 172642.png" alt="HealTap System">
+            <img src="assets/projects/Screenshot 2026-05-13 203603.png" alt="HealTap System">
+          </div>
+          <button class="carousel-btn prev">&#8249;</button>
+          <button class="carousel-btn next">&#8250;</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="project-num">02</div>
+        <div class="project-name">HealTap System</div>
+        <div class="project-case">
+          <div class="case-block">
+            <span class="case-label">Problem</span>
+            <span class="case-val">QCU health workflows relied on manual paperwork and slow record lookups</span>
+          </div>
+          <div class="case-block">
+            <span class="case-label">What I built</span>
+            <span class="case-val">JavaFX health management app with tap-based navigation and MySQL records</span>
+          </div>
+          <div class="case-block">
+            <span class="case-label">Result</span>
+            <span class="case-val">Streamlined clinic workflow with fast, accessible patient record management</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-lang" id="lang-1">—</div>
+          <a href="https://github.com/fortuitomark28/HealTapSystem" target="_blank" class="project-arrow">↗</a>
+        </div>
+      </div>
+    </div>
 
-    function initScripts() {
+    <div class="projects-row-mid">
+      <div class="project-card" data-type="desktop">
+        <div class="project-num">03</div>
+        <div class="project-name">Recent System 2026</div>
+        <div class="project-desc">Modern system architecture project built for 2026 workflows and updated data processing pipelines.</div>
+        <div class="project-meta">
+          <div class="project-lang" id="lang-2">—</div>
+          <a href="https://github.com/fortuitomark28/RECENT-SYSTEM-2026" target="_blank" class="project-arrow">↗</a>
+        </div>
+      </div>
+      <div class="project-card" data-type="web">
+        <div class="project-carousel">
+          <div class="carousel-track">
+            <img src="assets/projects/Screenshot 2026-05-13 172829.png" alt="Kanin">
+            <img src="assets/projects/Screenshot 2026-05-13 172845.png" alt="Kanin">
+          </div>
+          <button class="carousel-btn prev">&#8249;</button>
+          <button class="carousel-btn next">&#8250;</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="project-num">04</div>
+        <div class="project-name">Kanin</div>
+        <div class="project-desc">A daily meal budget tracker. Track every peso you spend on food — breakfast, lunch, dinner, snacks — with spending analytics and budget ring.</div>
+        <div class="project-meta">
+          <div class="project-lang" id="lang-3">—</div>
+          <a href="https://github.com/fortuitomark28/kanin" target="_blank" class="project-arrow">↗</a>
+        </div>
+      </div>
+      <div class="project-card" data-type="personal">
+        <div class="project-num">05</div>
+        <div class="project-name">CRUD Project</div>
+        <div class="project-desc">A clean, well-structured CRUD application demonstrating solid database design and RESTful API principles.</div>
+        <div class="project-meta">
+          <div class="project-lang" id="lang-4">—</div>
+          <a href="https://github.com/fortuitomark28/CRUD-PROJECT" target="_blank" class="project-arrow">↗</a>
+        </div>
+      </div>
+    </div>
 
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-document.documentElement.appendChild(cursor);
-document.documentElement.appendChild(ring);
+    <div class="projects-row-bot">
+      <div class="project-card" data-type="personal">
+        <div class="project-carousel">
+          <div class="carousel-track">
+            <img src="assets/projects/Screenshot 2026-05-13 174345.png" alt="Ayessa Project">
+            <img src="assets/projects/Screenshot 2026-05-13 174402.png" alt="Ayessa Project">
+            <img src="assets/projects/Screenshot 2026-05-13 174408.png" alt="Ayessa Project">
+          </div>
+          <button class="carousel-btn prev">&#8249;</button>
+          <button class="carousel-btn next">&#8250;</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="project-num">06</div>
+        <div class="project-name">Ayessa Project</div>
+        <div class="project-desc">A private full-stack web app built for someone special — love letters, a music playlist, gallery, and notes. Password protected with love.</div>
+        <div class="project-meta">
+          <div class="project-lang" id="lang-5">—</div>
+          <a href="https://github.com/fortuitomark28/ayessa_project" target="_blank" class="project-arrow">↗</a>
+        </div>
+      </div>
+      <div class="project-card" data-type="personal">
+        <div class="project-carousel">
+          <div class="carousel-track">
+            <img src="assets/projects/Screenshot 2026-05-13 172414.png" alt="Ayessa Valentines">
+            <img src="assets/projects/Screenshot 2026-05-13 172457.png" alt="Ayessa Valentines">
+            <img src="assets/projects/Screenshot 2026-05-13 172506.png" alt="Ayessa Valentines">
+          </div>
+          <button class="carousel-btn prev">&#8249;</button>
+          <button class="carousel-btn next">&#8250;</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <div class="project-num">07</div>
+        <div class="project-name">Ayessa Valentines</div>
+        <div class="project-desc">Proof that code can be expressive, emotional, and beautifully personal. Built with love and delivered on time.</div>
+        <div class="project-meta">
+          <div class="project-lang" id="lang-6">—</div>
+          <a href="https://github.com/fortuitomark28/ayessa_valentines" target="_blank" class="project-arrow">↗</a>
+        </div>
+      </div>
+    </div>
 
-let mx = 0, my = 0, rx = 0, ry = 0;
+  </div>
+</section>
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
-  cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
-});
+<style>
+  .project-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); color: #090909; border-color: var(--accent); }
+  .project-card.hidden-card { display: none; }
+  .project-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #111;
+    aspect-ratio: 16/9;
+  }
+  .carousel-track { display: flex; transition: transform 0.4s ease; height: 100%; }
+  .carousel-track img { min-width: 100%; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none; }
+  .carousel-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,0.6); color: #fff; border: none;
+    width: 32px; height: 32px; border-radius: 50%; font-size: 1.2rem;
+    cursor: pointer; z-index: 2; display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+  }
+  .carousel-btn:hover { background: rgba(0,0,0,0.9); }
+  .carousel-btn.prev { left: 8px; }
+  .carousel-btn.next { right: 8px; }
+  .carousel-dots { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; }
+  .carousel-dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: background 0.2s; }
+  .carousel-dots span.active { background: #fff; }
 
-(function animateRing() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
-  requestAnimationFrame(animateRing);
-})();
-
-function addCursorHover(selector) {
-  document.querySelectorAll(selector).forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
-    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
-  });
-}
-addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
-      setTimeout(() => {
-        const loader = document.getElementById('loader');
-        if (loader) loader.classList.add('hidden');
-      }, 1600);
-      const backToTop = document.getElementById('back-to-top');
-      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      window.addEventListener('scroll', () => {
-        document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-        backToTop.classList.toggle('visible', window.scrollY > 400);
-        updateActiveNav();
-      });
-      function updateActiveNav() {
-        const ids = ['hero', 'about', 'projects', 'skills', 'journey', 'contact'];
-        const links = document.querySelectorAll('.nav-links a');
-        let current = '';
-        ids.forEach(id => {
-          const el = document.getElementById(id);
-          if (el && window.scrollY >= el.offsetTop - 120) current = id;
-        });
-        links.forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-        });
-      }
-      updateActiveNav();
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      const projectCards = document.querySelectorAll('.project-card[data-type]');
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const filter = btn.dataset.filter;
-          projectCards.forEach(card => {
-            const match = filter === 'all' || card.dataset.type === filter;
-            card.classList.toggle('hidden-card', !match);
-          });
-        });
-      });
-      document.querySelectorAll('.project-carousel').forEach(carousel => {
-        const track = carousel.querySelector('.carousel-track');
-        const imgs  = track.querySelectorAll('img');
-        const dots  = carousel.querySelector('.carousel-dots');
-        let cur = 0;
-
-        imgs.forEach((_, i) => {
-          const dot = document.createElement('span');
-          if (i === 0) dot.classList.add('active');
-          dot.addEventListener('click', () => goTo(i));
-          dots.appendChild(dot);
-        });
-
-        function goTo(index) {
-          cur = (index + imgs.length) % imgs.length;
-          track.style.transform = `translateX(-${cur * 100}%)`;
-          dots.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === cur));
-        }
-
-        carousel.querySelector('.prev').addEventListener('click', () => goTo(cur - 1));
-        carousel.querySelector('.next').addEventListener('click', () => goTo(cur + 1));
-
-        if (imgs.length <= 1) {
-          carousel.querySelector('.prev').style.display = 'none';
-          carousel.querySelector('.next').style.display = 'none';
-        }
-      });
-      const lightbox    = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-
-      document.querySelectorAll('.carousel-track img').forEach(img => {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', () => {
-          lightboxImg.src = img.src;
-          lightbox.classList.add('open');
-        });
-      });
-
-      document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
-      lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
-      const repos = [
-        'VOTING-MANAGEMENT-SYSTEM-2025','HealTapSystem','RECENT-SYSTEM-2026',
-        'kanin','CRUD-PROJECT','ayessa_project','ayessa_valentines'
-      ];
-      repos.forEach((repo, i) => {
-        fetch(`https://api.github.com/repos/fortuitomark28/${repo}`)
-          .then(r => r.json())
-          .then(data => {
-            const el = document.getElementById(`lang-${i}`);
-            if (el) el.textContent = data.language || 'Code';
-          })
-          .catch(() => {
-            const el = document.getElementById(`lang-${i}`);
-            if (el) el.textContent = 'Code';
-          });
-      });
-
-      fetch('https://api.github.com/users/fortuitomark28')
-        .then(r => r.json())
-        .then(data => {
-          if (data.public_repos) document.getElementById('repoCount').textContent = data.public_repos;
-        })
-        .catch(() => {});
-    }
-  </script>
-
-</body>
-</html>
+  /* Case study blocks */
+  .project-case {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+  .case-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+  }
+  .case-label {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .case-val {
+    font-size: 12px;
+    color: var(--fg);
+    line-height: 1.4;
+  }
+</style>
