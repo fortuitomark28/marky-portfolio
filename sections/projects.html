@@ -30,7 +30,20 @@
         </div>
         <div class="project-num">01</div>
         <div class="project-name">Voting Management System</div>
-        <div class="project-desc">A full-featured digital voting platform built for 2025. Handles voter registration, ballot management, and real-time result tracking with secure backend architecture.</div>
+        <div class="project-case">
+          <div class="case-block">
+            <span class="case-label">Problem</span>
+            <span class="case-val">QCU needed a faster, more reliable way to run student elections</span>
+          </div>
+          <div class="case-block">
+            <span class="case-label">What I built</span>
+            <span class="case-val">JavaFX desktop app with voter registration, ballot management, and live results</span>
+          </div>
+          <div class="case-block">
+            <span class="case-label">Result</span>
+            <span class="case-val">Fully functional election system with MySQL-backed audit trail</span>
+          </div>
+        </div>
         <div class="project-meta">
           <div class="project-lang" id="lang-0">—</div>
           <a href="https://github.com/fortuitomark28/VOTING-MANAGEMENT-SYSTEM-2025" target="_blank" class="project-arrow">↗</a>
@@ -49,7 +62,20 @@
         </div>
         <div class="project-num">02</div>
         <div class="project-name">HealTap System</div>
-        <div class="project-desc">Health tech application focused on accessible tap-based interactions for medical records and health monitoring workflows.</div>
+        <div class="project-case">
+          <div class="case-block">
+            <span class="case-label">Problem</span>
+            <span class="case-val">QCU health workflows relied on manual paperwork and slow record lookups</span>
+          </div>
+          <div class="case-block">
+            <span class="case-label">What I built</span>
+            <span class="case-val">JavaFX health management app with tap-based navigation and MySQL records</span>
+          </div>
+          <div class="case-block">
+            <span class="case-label">Result</span>
+            <span class="case-val">Streamlined clinic workflow with fast, accessible patient record management</span>
+          </div>
+        </div>
         <div class="project-meta">
           <div class="project-lang" id="lang-1">—</div>
           <a href="https://github.com/fortuitomark28/HealTapSystem" target="_blank" class="project-arrow">↗</a>
@@ -185,4 +211,32 @@
   .carousel-dots { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; }
   .carousel-dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: background 0.2s; }
   .carousel-dots span.active { background: #fff; }
+
+  /* Case study blocks */
+  .project-case {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+  .case-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+  }
+  .case-label {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .case-val {
+    font-size: 12px;
+    color: var(--fg);
+    line-height: 1.4;
+  }
 </style>
