@@ -1,8 +1,3 @@
-/* ============================================================
-   MARK FORTUITO — Portfolio Scripts
-   ============================================================ */
-
-// ── CUSTOM CURSOR ────────────────────────────────────────────
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -23,7 +18,6 @@ function animateRing() {
 }
 animateRing();
 
-// Cursor hover effect on interactive elements
 document.querySelectorAll('a, button, .skill-tag, .project-card').forEach(el => {
   el.addEventListener('mouseenter', () => {
     cursor.classList.add('hover');
@@ -35,18 +29,31 @@ document.querySelectorAll('a, button, .skill-tag, .project-card').forEach(el => 
   });
 });
 
-// ── LOADER ───────────────────────────────────────────────────
-// Directly hide loader since script.js is injected after page load
 setTimeout(() => {
   document.getElementById('loader').classList.add('hidden');
 }, 1600);
 
-// ── NAV SCROLL STATE ─────────────────────────────────────────
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// ── SCROLL REVEAL ────────────────────────────────────────────
+const burger = document.getElementById('burger');
+const navLinks = document.querySelector('.nav-links');
+
+if (burger) {
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+}
+
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -57,7 +64,6 @@ const observer = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
 
-// ── GITHUB API — Fetch repo languages ────────────────────────
 const repos = [
   'VOTING-MANAGEMENT-SYSTEM-2025',
   'HealTapSystem',
@@ -81,7 +87,6 @@ repos.forEach((repo, i) => {
     });
 });
 
-// Fetch total public repo count
 fetch('https://api.github.com/users/fortuitomark28')
   .then(r => r.json())
   .then(data => {

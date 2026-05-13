@@ -1,7 +1,3 @@
-/* ============================================================
-   MARK FORTUITO — Portfolio Styles
-   ============================================================ */
-
 :root {
   --bg: #090909;
   --bg2: #0f0f0f;
@@ -33,13 +29,11 @@ body {
   cursor: none;
 }
 
-/* ── SCROLLBAR ────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* ── NOISE OVERLAY ────────────────────────────────────────── */
 body::before {
   content: '';
   position: fixed;
@@ -50,7 +44,6 @@ body::before {
   opacity: 0.4;
 }
 
-/* ── CURSOR ───────────────────────────────────────────────── */
 .cursor {
   position: fixed;
   width: 8px;
@@ -83,7 +76,6 @@ body::before {
   border-color: var(--accent);
 }
 
-/* ── LOADER ───────────────────────────────────────────────── */
 #loader {
   position: fixed;
   inset: 0;
@@ -132,7 +124,6 @@ body::before {
   animation: load 1.4s ease forwards;
 }
 
-/* ── NAV ──────────────────────────────────────────────────── */
 nav {
   position: fixed;
   top: 0;
@@ -193,7 +184,8 @@ nav.scrolled { border-color: var(--border); }
 .nav-links a:hover { color: var(--accent); }
 .nav-links a:hover::after { width: 100%; }
 
-/* ── HERO ─────────────────────────────────────────────────── */
+.burger { display: none; }
+
 #hero {
   min-height: 100vh;
   display: flex;
@@ -324,7 +316,6 @@ nav.scrolled { border-color: var(--border); }
   animation: scrollPulse 2s ease infinite;
 }
 
-/* ── BUTTONS ──────────────────────────────────────────────── */
 .btn {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
@@ -359,7 +350,6 @@ nav.scrolled { border-color: var(--border); }
   color: var(--accent);
 }
 
-/* ── SECTIONS ─────────────────────────────────────────────── */
 section { padding: 120px 48px; }
 
 .section-label {
@@ -382,7 +372,6 @@ section { padding: 120px 48px; }
   max-width: 80px;
 }
 
-/* ── ABOUT ────────────────────────────────────────────────── */
 #about { border-top: 1px solid var(--border); }
 
 .about-grid {
@@ -442,7 +431,6 @@ section { padding: 120px 48px; }
   letter-spacing: 0.1em;
 }
 
-/* Terminal */
 .about-terminal {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -488,7 +476,6 @@ section { padding: 120px 48px; }
 .t-out { color: #666; }
 .t-key { color: var(--accent2); }
 
-/* ── PROJECTS ─────────────────────────────────────────────── */
 #projects {
   border-top: 1px solid var(--border);
   background: var(--bg2);
@@ -630,7 +617,6 @@ section { padding: 120px 48px; }
   background: rgba(200, 240, 110, 0.08);
 }
 
-/* ── SKILLS ───────────────────────────────────────────────── */
 #skills { border-top: 1px solid var(--border); }
 
 .skills-layout {
@@ -688,7 +674,6 @@ section { padding: 120px 48px; }
   background: rgba(200, 240, 110, 0.05);
 }
 
-/* ── JOURNEY ──────────────────────────────────────────────── */
 #journey {
   border-top: 1px solid var(--border);
   background: var(--bg2);
@@ -765,7 +750,6 @@ section { padding: 120px 48px; }
   line-height: 1.7;
 }
 
-/* ── CONTACT ──────────────────────────────────────────────── */
 #contact { border-top: 1px solid var(--border); }
 
 .contact-layout {
@@ -849,7 +833,6 @@ section { padding: 120px 48px; }
   transform: translate(2px, -2px);
 }
 
-/* ── FOOTER ───────────────────────────────────────────────── */
 footer {
   padding: 32px 48px;
   border-top: 1px solid var(--border);
@@ -873,7 +856,6 @@ footer {
 
 .footer-tag span { color: var(--accent); }
 
-/* ── REVEAL ANIMATION ─────────────────────────────────────── */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -885,7 +867,6 @@ footer {
   transform: translateY(0);
 }
 
-/* ── KEYFRAMES ────────────────────────────────────────────── */
 @keyframes load {
   to { left: 100%; }
 }
@@ -925,13 +906,56 @@ footer {
   50% { opacity: 1; }
 }
 
-/* ── MOBILE ───────────────────────────────────────────────── */
 @media (max-width: 768px) {
   nav { padding: 20px 24px; }
-  .nav-links { display: none; }
+
+  .burger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1001;
+  }
+  .burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    transition: all 0.3s ease;
+  }
+  .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(9,9,9,0.97);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    z-index: 1000;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { font-size: 1.4rem; }
+
   section { padding: 80px 24px; }
   #hero { padding: 0 24px 60px; }
   .hero-scroll { display: none; }
+
+  .hero-cta {
+    flex-direction: column;
+  }
+  .hero-cta .btn {
+    width: 100%;
+    text-align: center;
+  }
+
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .projects-row-top,
   .projects-row-mid,
