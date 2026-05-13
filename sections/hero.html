@@ -1,0 +1,70 @@
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-content">
+    <div class="hero-tag">fortuitomark28 &mdash; developer</div>
+    <h1 class="hero-name">
+      Mark<br>
+      <span class="line2">Fortuito</span>
+    </h1>
+    <p class="hero-bio">
+      <span id="typed-text">I JUST LOVE VIBE CODING</span><span class="blink"></span>
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="assets/Mark_Fortuito_CV.pdf" download class="btn btn-ghost">Download CV</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<script>
+  (function() {
+    var phrases = [
+      "I just love vibe coding.",
+      "I build things with purpose.",
+      "Always in the zone.",
+      "Let's ship something great."
+    ];
+    var phraseIndex = 0;
+    var charIndex = 0;
+    var isDeleting = false;
+    var el = document.getElementById('typed-text');
+
+    function type() {
+      if (!el) {
+        el = document.getElementById('typed-text');
+        if (!el) return;
+      }
+      var current = phrases[phraseIndex];
+
+      if (isDeleting) {
+        charIndex--;
+        el.textContent = current.substring(0, charIndex);
+      } else {
+        charIndex++;
+        el.textContent = current.substring(0, charIndex);
+      }
+
+      var delay = isDeleting ? 40 : 70;
+
+      if (!isDeleting && charIndex === current.length) {
+        delay = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        delay = 400;
+      }
+
+      setTimeout(type, delay);
+    }
+
+    setTimeout(type, 2500);
+  })();
+</script>
