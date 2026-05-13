@@ -24,6 +24,7 @@
   <style>
     html { scroll-behavior: smooth; }
 
+    /* Page fade-in */
     body {
       opacity: 0;
       animation: pageFadeIn 0.5s ease 0.1s forwards;
@@ -43,6 +44,7 @@
       box-shadow: 0 16px 40px rgba(0,0,0,0.4);
     }
 
+    /* Lightbox */
     #lightbox {
       display: none;
       position: fixed;
@@ -74,6 +76,7 @@
       line-height: 1;
     }
 
+    /* Back to top */
     #back-to-top {
       position: fixed;
       bottom: 40px;
@@ -109,14 +112,17 @@
 </head>
 <body>
 
+  <!-- CURSOR -->
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
+  <!-- LOADER -->
   <div id="loader">
     <div class="loader-initials">M<span>F</span></div>
     <div class="loader-bar"></div>
   </div>
 
+  <!-- NAV -->
   <nav id="nav">
     <a href="#hero" class="nav-logo">mark<span>.</span>dev</a>
     <ul class="nav-links">
@@ -126,16 +132,15 @@
       <li><a href="#journey">Journey</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="burger" id="burger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
   </nav>
 
+  <!-- LIGHTBOX -->
   <div id="lightbox">
     <button id="lightbox-close">✕</button>
     <img id="lightbox-img" src="" alt="Preview">
   </div>
 
+  <!-- BACK TO TOP -->
   <button id="back-to-top" aria-label="Back to top">↑</button>
 
   <div id="hero-slot"></div>
@@ -145,6 +150,7 @@
   <div id="journey-slot"></div>
   <div id="contact-slot"></div>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-copy">© 2026 Mark Fortuito. All rights reserved.</div>
     <div class="footer-tag">Built with <span>love</span> & vibe coding.</div>
@@ -171,48 +177,45 @@
     });
 
     function initScripts() {
-      const cursor = document.getElementById('cursor');
-      const ring = document.getElementById('cursorRing');
-      document.documentElement.appendChild(cursor);
-      document.documentElement.appendChild(ring);
 
-      let mx = 0, my = 0, rx = 0, ry = 0;
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.documentElement.appendChild(cursor);
+document.documentElement.appendChild(ring);
 
-      document.addEventListener('mousemove', e => {
-        mx = e.clientX;
-        my = e.clientY;
-        cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
-      });
+let mx = 0, my = 0, rx = 0, ry = 0;
 
-      (function animateRing() {
-        rx += (mx - rx) * 0.12;
-        ry += (my - ry) * 0.12;
-        ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
-        requestAnimationFrame(animateRing);
-      })();
+document.addEventListener('mousemove', e => {
+  mx = e.clientX;
+  my = e.clientY;
+  cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+});
 
-      function addCursorHover(selector) {
-        document.querySelectorAll(selector).forEach(el => {
-          el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
-          el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
-        });
-      }
-      addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
+(function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
+  requestAnimationFrame(animateRing);
+})();
 
+function addCursorHover(selector) {
+  document.querySelectorAll(selector).forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+  });
+}
+addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
       setTimeout(() => {
         const loader = document.getElementById('loader');
         if (loader) loader.classList.add('hidden');
       }, 1600);
-
       const backToTop = document.getElementById('back-to-top');
       backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
       window.addEventListener('scroll', () => {
         document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
         backToTop.classList.toggle('visible', window.scrollY > 400);
         updateActiveNav();
       });
-
       function updateActiveNav() {
         const ids = ['hero', 'about', 'projects', 'skills', 'journey', 'contact'];
         const links = document.querySelectorAll('.nav-links a');
@@ -226,29 +229,13 @@
         });
       }
       updateActiveNav();
-
-      const burger = document.getElementById('burger');
-      const navLinks = document.querySelector('.nav-links');
-      if (burger) {
-        burger.addEventListener('click', () => {
-          burger.classList.toggle('open');
-          navLinks.classList.toggle('open');
-        });
-        document.querySelectorAll('.nav-links a').forEach(link => {
-          link.addEventListener('click', () => {
-            burger.classList.remove('open');
-            navLinks.classList.remove('open');
-          });
-        });
-      }
-
       const observer = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
       }, { threshold: 0.1 });
       document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
-
       const filterBtns = document.querySelectorAll('.filter-btn');
       const projectCards = document.querySelectorAll('.project-card[data-type]');
+
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           filterBtns.forEach(b => b.classList.remove('active'));
@@ -260,7 +247,6 @@
           });
         });
       });
-
       document.querySelectorAll('.project-carousel').forEach(carousel => {
         const track = carousel.querySelector('.carousel-track');
         const imgs  = track.querySelectorAll('img');
@@ -288,7 +274,6 @@
           carousel.querySelector('.next').style.display = 'none';
         }
       });
-
       const lightbox    = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
 
@@ -303,7 +288,6 @@
       document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
       lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
       document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
-
       const repos = [
         'VOTING-MANAGEMENT-SYSTEM-2025','HealTapSystem','RECENT-SYSTEM-2026',
         'kanin','CRUD-PROJECT','ayessa_project','ayessa_valentines'
