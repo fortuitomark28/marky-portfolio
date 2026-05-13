@@ -949,6 +949,6 @@ footer {
 }
 .case-val {
   font-size: 12px;
-  color: var(--text); 
+  color: var(--fg); 
   line-height: 1.4;
 }
