@@ -224,13 +224,11 @@
     }
 
     @media (max-width: 768px) {
-  #back-to-top { bottom: 24px; right: 24px; }
-  .nav-burger { display: flex; }
-  .mobile-menu { display: flex; }
-  .mobile-menu-overlay { display: block; }
-  body { cursor: auto; }
-  .cursor, .cursor-ring { display: none; } 
-}
+      #back-to-top { bottom: 24px; right: 24px; }
+      .nav-burger { display: flex; }
+      .mobile-menu { display: flex; }
+      .mobile-menu-overlay { display: block; }
+    }
   </style>
 </head>
 <body>
@@ -534,6 +532,29 @@
         if (e.key === 'Escape') closeMenu();
       });
     }
+document.getElementById('navBurger').addEventListener('click', function() {
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('menuOverlay');
+  const isOpen = this.classList.contains('open');
+  if (isOpen) {
+    this.classList.remove('open');
+    menu.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  } else {
+    this.classList.add('open');
+    menu.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+});
+
+document.getElementById('menuOverlay').addEventListener('click', function() {
+  document.getElementById('navBurger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+  this.classList.remove('open');
+  document.body.style.overflow = '';
+});
   </script>
 
 </body>
