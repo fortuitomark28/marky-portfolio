@@ -1,11 +1,20 @@
-
 #hero {
-min-height: calc(100vh - 72px);
+  min-height: calc(100vh - 72px);
   display: flex;
   align-items: flex-end;
   padding: 96px 48px 80px;
   position: relative;
+  /* overflow: hidden REMOVED — breaks position:fixed nav on iOS Safari */
+}
+
+/* Clip the orb/grid without affecting fixed positioning */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero-grid {
@@ -16,6 +25,7 @@ min-height: calc(100vh - 72px);
     linear-gradient(90deg, rgba(200, 240, 110, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
   animation: gridDrift 20s linear infinite;
+  clip-path: inset(0);
 }
 
 .hero-orb {
@@ -28,6 +38,7 @@ min-height: calc(100vh - 72px);
   right: -100px;
   animation: orbFloat 8s ease-in-out infinite;
   pointer-events: none;
+  clip-path: inset(0);
 }
 
 .hero-content {
