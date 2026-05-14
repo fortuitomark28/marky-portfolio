@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
   <title>Mark Fortuito — Developer</title>
 
   <meta name="description" content="Mark Fortuito — Developer who loves vibe coding. Building systems, apps, and tools with purpose and passion.">
   <meta property="og:title" content="Mark Fortuito — Developer">
   <meta property="og:description" content="Building systems, apps, and tools with purpose and passion. Check out my portfolio.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://markfortuito.vercel.app">
-  <meta property="og:image" content="https://markfortuito.vercel.app/assets/og-image.png">
+  <meta property="og:url" content="https://marky-portfolio-red.vercel.app">
+  <meta property="og:image" content="https://marky-portfolio-red.vercel.app/assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mark Fortuito — Developer">
   <meta name="twitter:description" content="Building systems, apps, and tools with purpose and passion.">
@@ -20,7 +21,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- ── Stylesheets ── -->
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/components.css">
   <link rel="stylesheet" href="styles/nav.css">
@@ -228,8 +228,8 @@
       document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
 
       // ── Project filter ──
-      const filterBtns    = document.querySelectorAll('.filter-btn');
-      const projectCards  = document.querySelectorAll('.project-card[data-type]');
+      const filterBtns   = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card[data-type]');
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           filterBtns.forEach(b => b.classList.remove('active'));
@@ -286,31 +286,61 @@
       document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
       lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
 
-      // ── GitHub: repo languages ──
+      // ── GitHub: repo languages (sessionStorage cached) ──
       const repos = [
         'VOTING-MANAGEMENT-SYSTEM-2025', 'HealTapSystem', 'RECENT-SYSTEM-2026',
         'kanin', 'CRUD-PROJECT', 'ayessa_project', 'ayessa_valentines'
       ];
-      repos.forEach((repo, i) => {
-        fetch(`https://api.github.com/repos/fortuitomark28/${repo}`)
+
+      const cachedLangs = sessionStorage.getItem('gh_langs');
+
+      if (cachedLangs) {
+        JSON.parse(cachedLangs).forEach((lang, i) => {
+          const el = document.getElementById(`lang-${i}`);
+          if (el) el.textContent = lang;
+        });
+      } else {
+        const langs = [];
+        let done = 0;
+        repos.forEach((repo, i) => {
+          fetch(`https://api.github.com/repos/fortuitomark28/${repo}`)
+            .then(r => r.json())
+            .then(data => {
+              langs[i] = data.language || 'Code';
+              const el = document.getElementById(`lang-${i}`);
+              if (el) el.textContent = langs[i];
+            })
+            .catch(() => {
+              langs[i] = 'Code';
+              const el = document.getElementById(`lang-${i}`);
+              if (el) el.textContent = 'Code';
+            })
+            .finally(() => {
+              if (++done === repos.length) {
+                sessionStorage.setItem('gh_langs', JSON.stringify(langs));
+              }
+            });
+        });
+      }
+
+      // ── GitHub: repo count (sessionStorage cached) ──
+      const cachedCount = sessionStorage.getItem('gh_repocount');
+
+      if (cachedCount) {
+        const el = document.getElementById('repoCount');
+        if (el) el.textContent = cachedCount;
+      } else {
+        fetch('https://api.github.com/users/fortuitomark28')
           .then(r => r.json())
           .then(data => {
-            const el = document.getElementById(`lang-${i}`);
-            if (el) el.textContent = data.language || 'Code';
+            if (data.public_repos) {
+              const el = document.getElementById('repoCount');
+              if (el) el.textContent = data.public_repos;
+              sessionStorage.setItem('gh_repocount', data.public_repos);
+            }
           })
-          .catch(() => {
-            const el = document.getElementById(`lang-${i}`);
-            if (el) el.textContent = 'Code';
-          });
-      });
-
-      // ── GitHub: repo count ──
-      fetch('https://api.github.com/users/fortuitomark28')
-        .then(r => r.json())
-        .then(data => {
-          if (data.public_repos) document.getElementById('repoCount').textContent = data.public_repos;
-        })
-        .catch(() => {});
+          .catch(() => {});
+      }
 
       // ── Mobile menu ──
       const burger      = document.getElementById('navBurger');
