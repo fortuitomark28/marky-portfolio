@@ -49,3 +49,19 @@
 
   #back-to-top { bottom: 24px; right: 24px; }
 }
+@media (max-width: 768px) {
+  .projects-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .projects-row-top,
+  .projects-row-mid,
+  .projects-row-bot {
+    display: contents;
+  }
+
+  .project-card:not(:has(.project-carousel)) {
+    order: 99;
+  }
+}
