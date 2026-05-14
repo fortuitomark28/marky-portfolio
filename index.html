@@ -19,270 +19,30 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
 
-  <style>
-    html { scroll-behavior: smooth; }
-    body {
-      opacity: 0;
-      animation: pageFadeIn 0.5s ease 0.1s forwards;
-    }
-    @keyframes pageFadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .nav-links a.active { color: #c8f135; }
-
-    .project-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-    }
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      cursor: zoom-out;
-    }
-    #lightbox.open { display: flex; }
-    #lightbox img {
-      max-width: 90vw;
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 0 60px rgba(0,0,0,0.8);
-    }
-    #lightbox-close {
-      position: fixed;
-      top: 20px;
-      right: 28px;
-      color: #fff;
-      font-size: 2rem;
-      cursor: pointer;
-      z-index: 10000;
-      background: none;
-      border: none;
-      line-height: 1;
-    }
-    #back-to-top {
-      position: fixed;
-      bottom: 40px;
-      right: 40px;
-      width: 44px;
-      height: 44px;
-      background: var(--accent, #c8f135);
-      color: #090909;
-      border: none;
-      font-size: 20px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 500;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s;
-      pointer-events: none;
-    }
-    #back-to-top.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    #back-to-top:hover { background: #fff; }
-
-    .nav-burger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border);
-  background: none;
-  cursor: pointer;
-  padding: 10px;
-  z-index: 301;
-}
-
-.nav-burger span {
-  display: block;
-  width: 100%;
-  height: 1px;
-  background: #e8e8e4;
-  transition: all 0.3s ease;
-}
-
-.nav-burger.open span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.nav-burger.open span:nth-child(2) {
-  opacity: 0;
-}
-
-.nav-burger.open span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-.mobile-menu-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 199;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease;
-}
-
-.mobile-menu-overlay.open {
-  display: block;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 75%;
-  max-width: 320px;
-  background: #090909;
-  border-right: 1px solid #1e1e1e;
-  z-index: 200;
-  flex-direction: column;
-  padding: 80px 32px 40px;
-  transform: translateX(-100%);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mobile-menu.open {
-  transform: translateX(0);
-}
-
-@media (max-width: 768px) {
-  nav {
-    position: fixed;
-    padding: 16px 20px;
-    z-index: 500;
-  }
-
-  .nav-links {
-    display: none !important;
-  }
-
-  .nav-burger {
-    display: flex;
-    position: relative;
-    z-index: 501;
-  }
-
-  .mobile-menu {
-    display: flex;
-    z-index: 400;
-    padding-top: 88px;
-  }
-
-  .mobile-menu-overlay {
-    z-index: 350;
-  }
-}
-
-    .mobile-menu-header {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      color: #555;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding-bottom: 16px;
-      border-bottom: 1px solid #1e1e1e;
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .mobile-nav-links {
-      list-style: none;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .mobile-nav-links li { border-bottom: 1px solid #1e1e1e; }
-    .mobile-nav-links a {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-      text-decoration: none;
-      color: #e8e8e4;
-      font-family: 'Syne', sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -1px;
-      transition: color 0.2s;
-    }
-    .mobile-nav-links a:hover { color: #c8f135; }
-    .mobile-nav-links .link-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      color: #555;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      align-self: flex-start;
-      margin-top: 6px;
-    }
-    .mobile-nav-links .link-arrow {
-      font-size: 18px;
-      color: #555;
-      transition: all 0.2s;
-    }
-    .mobile-nav-links a:hover .link-arrow {
-      color: #c8f135;
-      transform: translate(4px, -4px);
-    }
-
-    .mobile-menu-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 24px;
-      border-top: 1px solid #1e1e1e;
-    }
-    .mobile-menu-footer span {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      color: #555;
-      letter-spacing: 0.1em;
-    }
-
-    @media (max-width: 768px) {
-      #back-to-top { bottom: 24px; right: 24px; }
-      .nav-burger { display: flex; }
-      .mobile-menu { display: flex; }
-      .mobile-menu-overlay { display: block; }
-    }
-  </style>
+  <!-- ── Stylesheets ── -->
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/nav.css">
+  <link rel="stylesheet" href="styles/hero.css">
+  <link rel="stylesheet" href="styles/about.css">
+  <link rel="stylesheet" href="styles/projects.css">
+  <link rel="stylesheet" href="styles/skills.css">
+  <link rel="stylesheet" href="styles/journey.css">
+  <link rel="stylesheet" href="styles/contact.css">
+  <link rel="stylesheet" href="styles/animations.css">
+  <link rel="stylesheet" href="styles/mobile.css">
 </head>
 <body>
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
+
   <div id="loader">
     <div class="loader-initials">M<span>F</span></div>
     <div class="loader-bar"></div>
   </div>
 
+  <!-- ── Nav ── -->
   <nav id="nav">
     <a href="#hero" class="nav-logo">mark<span>.</span>dev</a>
     <ul class="nav-links">
@@ -299,6 +59,7 @@
     </button>
   </nav>
 
+  <!-- ── Mobile Menu ── -->
   <div class="mobile-menu-overlay" id="menuOverlay"></div>
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
@@ -348,23 +109,30 @@
     </div>
   </div>
 
+  <!-- ── Lightbox ── -->
   <div id="lightbox">
     <button id="lightbox-close">✕</button>
     <img id="lightbox-img" src="" alt="Preview">
   </div>
+
+  <!-- ── Back to Top ── -->
   <button id="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- ── Section Slots ── -->
   <div id="hero-slot"></div>
   <div id="about-slot"></div>
   <div id="projects-slot"></div>
   <div id="skills-slot"></div>
   <div id="journey-slot"></div>
   <div id="contact-slot"></div>
+
   <footer>
     <div class="footer-copy">© 2026 Mark Fortuito. All rights reserved.</div>
     <div class="footer-tag">Built with <span>love</span> & vibe coding.</div>
   </footer>
 
   <script>
+    // ── Section loader ──
     const sections = ['hero', 'about', 'projects', 'skills', 'journey', 'contact'];
     let loaded = 0;
 
@@ -386,8 +154,9 @@
 
     function initScripts() {
 
+      // ── Custom cursor ──
       const cursor = document.getElementById('cursor');
-      const ring = document.getElementById('cursorRing');
+      const ring   = document.getElementById('cursorRing');
       document.documentElement.appendChild(cursor);
       document.documentElement.appendChild(ring);
 
@@ -408,28 +177,38 @@
 
       function addCursorHover(selector) {
         document.querySelectorAll(selector).forEach(el => {
-          el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
-          el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+          el.addEventListener('mouseenter', () => {
+            cursor.classList.add('hover');
+            ring.classList.add('hover');
+          });
+          el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('hover');
+            ring.classList.remove('hover');
+          });
         });
       }
       addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
 
+      // ── Loader ──
       setTimeout(() => {
         const loader = document.getElementById('loader');
         if (loader) loader.classList.add('hidden');
       }, 1600);
 
+      // ── Back to top ──
       const backToTop = document.getElementById('back-to-top');
       backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
+      // ── Scroll events ──
       window.addEventListener('scroll', () => {
         document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
         backToTop.classList.toggle('visible', window.scrollY > 400);
         updateActiveNav();
       });
 
+      // ── Active nav highlight ──
       function updateActiveNav() {
-        const ids = ['hero', 'about', 'projects', 'skills', 'journey', 'contact'];
+        const ids   = ['hero', 'about', 'projects', 'skills', 'journey', 'contact'];
         const links = document.querySelectorAll('.nav-links a');
         let current = '';
         ids.forEach(id => {
@@ -442,13 +221,15 @@
       }
       updateActiveNav();
 
+      // ── Intersection observer (reveal + timeline) ──
       const observer = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
       }, { threshold: 0.1 });
       document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
 
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      const projectCards = document.querySelectorAll('.project-card[data-type]');
+      // ── Project filter ──
+      const filterBtns    = document.querySelectorAll('.filter-btn');
+      const projectCards  = document.querySelectorAll('.project-card[data-type]');
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           filterBtns.forEach(b => b.classList.remove('active'));
@@ -461,6 +242,7 @@
         });
       });
 
+      // ── Carousels ──
       document.querySelectorAll('.project-carousel').forEach(carousel => {
         const track = carousel.querySelector('.carousel-track');
         const imgs  = track.querySelectorAll('img');
@@ -489,8 +271,10 @@
         }
       });
 
+      // ── Lightbox ──
       const lightbox    = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
+
       document.querySelectorAll('.carousel-track img').forEach(img => {
         img.style.cursor = 'zoom-in';
         img.addEventListener('click', () => {
@@ -498,13 +282,14 @@
           lightbox.classList.add('open');
         });
       });
+
       document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
       lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
 
+      // ── GitHub: repo languages ──
       const repos = [
-        'VOTING-MANAGEMENT-SYSTEM-2025','HealTapSystem','RECENT-SYSTEM-2026',
-        'kanin','CRUD-PROJECT','ayessa_project','ayessa_valentines'
+        'VOTING-MANAGEMENT-SYSTEM-2025', 'HealTapSystem', 'RECENT-SYSTEM-2026',
+        'kanin', 'CRUD-PROJECT', 'ayessa_project', 'ayessa_valentines'
       ];
       repos.forEach((repo, i) => {
         fetch(`https://api.github.com/repos/fortuitomark28/${repo}`)
@@ -519,6 +304,7 @@
           });
       });
 
+      // ── GitHub: repo count ──
       fetch('https://api.github.com/users/fortuitomark28')
         .then(r => r.json())
         .then(data => {
@@ -526,58 +312,59 @@
         })
         .catch(() => {});
 
-const burger = document.getElementById('navBurger');
-const mobileMenu = document.getElementById('mobileMenu');
-const menuOverlay = document.getElementById('menuOverlay');
-const menuCount = document.getElementById('menuCount');
-const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-const total = mobileLinks.length;
+      // ── Mobile menu ──
+      const burger      = document.getElementById('navBurger');
+      const mobileMenu  = document.getElementById('mobileMenu');
+      const menuOverlay = document.getElementById('menuOverlay');
+      const menuCount   = document.getElementById('menuCount');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+      const total       = mobileLinks.length;
+      let countInterval;
 
-let countInterval;
+      function animateCounter(target) {
+        let i = 1;
+        clearInterval(countInterval);
+        countInterval = setInterval(() => {
+          menuCount.textContent = `— 0${i} / 0${total}`;
+          i++;
+          if (i > target) clearInterval(countInterval);
+        }, 60);
+      }
 
-function animateCounter(target) {
-  let i = 1;
-  clearInterval(countInterval);
+      function openMenu() {
+        burger.classList.add('open');
+        mobileMenu.classList.add('open');
+        menuOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        animateCounter(total);
+      }
 
-  countInterval = setInterval(() => {
-    menuCount.textContent = `— 0${i} / 0${total}`;
-    i++;
+      function closeMenu() {
+        burger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        menuOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
 
-    if (i > target) clearInterval(countInterval);
-  }, 60);
-}
+      burger.addEventListener('click', () => {
+        burger.classList.contains('open') ? closeMenu() : openMenu();
+      });
 
-function openMenu() {
-  burger.classList.add('open');
-  mobileMenu.classList.add('open');
-  menuOverlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  animateCounter(total);
-}
+      menuOverlay.addEventListener('click', closeMenu);
 
-function closeMenu() {
-  burger.classList.remove('open');
-  mobileMenu.classList.remove('open');
-  menuOverlay.classList.remove('open');
-  document.body.style.overflow = '';
-}
+      mobileLinks.forEach((link, i) => {
+        link.addEventListener('click', closeMenu);
+        link.addEventListener('mouseenter', () => {
+          menuCount.textContent = `— 0${i + 1} / 0${total}`;
+        });
+      });
 
-burger.addEventListener('click', () => {
-  burger.classList.contains('open') ? closeMenu() : openMenu();
-});
-
-menuOverlay.addEventListener('click', closeMenu);
-
-mobileLinks.forEach((link, i) => {
-  link.addEventListener('click', closeMenu);
-
-  link.addEventListener('mouseenter', () => {
-    menuCount.textContent = `— 0${i + 1} / 0${total}`;
-  });
-});
-
+      // ── Global keyboard shortcuts ──
       document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeMenu();
+        if (e.key === 'Escape') {
+          closeMenu();
+          lightbox.classList.remove('open');
+        }
       });
     }
   </script>

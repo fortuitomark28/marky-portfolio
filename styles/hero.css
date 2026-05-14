@@ -1,0 +1,133 @@
+/* ─────────────────────────────────────────
+   HERO
+   ───────────────────────────────────────── */
+
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 96px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200, 240, 110, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 240, 110, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridDrift 20s linear infinite;
+}
+
+.hero-orb {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 240, 110, 0.06) 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
+  animation: orbFloat 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.hero-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero-name {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(56px, 9vw, 120px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -4px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+
+.hero-name .line2 {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(232, 232, 228, 0.3);
+}
+
+.hero-bio {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.6s forwards;
+}
+
+.blink {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  background: var(--accent);
+  animation: blink 1s step-end infinite;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.8s forwards;
+}
+
+.hero-scroll {
+  position: absolute;
+  right: 48px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.2s forwards;
+}
+
+.hero-scroll span {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollPulse 2s ease infinite;
+}

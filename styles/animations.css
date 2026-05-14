@@ -1,0 +1,47 @@
+/* ─────────────────────────────────────────
+   ANIMATIONS — all @keyframes
+   ───────────────────────────────────────── */
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes load {
+  to { left: 100%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes gridDrift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(60px); }
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(-30px, 30px) scale(1.05); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}

@@ -1,0 +1,58 @@
+/* ─────────────────────────────────────────
+   MOBILE — responsive overrides (always last)
+   ───────────────────────────────────────── */
+
+/* ── Desktop: force nav visible, hide burger ── */
+@media (min-width: 769px) {
+  .nav-links  { display: flex !important; }
+  .nav-burger { display: none !important; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  /* Nav */
+  nav          { padding: 14px 20px; height: 64px; }
+  .nav-links   { display: none !important; }
+  .nav-burger  { display: flex !important; }
+  .mobile-menu { display: flex; }
+  .mobile-menu-overlay { display: block; }
+
+  /* Body */
+  body       { padding-top: 64px; cursor: auto; }
+  .cursor,
+  .cursor-ring { display: none; }
+
+  /* Sections */
+  section { padding: 80px 24px; }
+  #hero   { padding: 24px 24px 60px; }
+
+  /* Hero */
+  .hero-scroll { display: none; }
+  .hero-cta    { flex-direction: column; }
+  .hero-cta .btn { width: 100%; text-align: center; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Projects */
+  .projects-row-top,
+  .projects-row-mid,
+  .projects-row-bot { grid-template-columns: 1fr; }
+
+  /* Skills */
+  .skills-layout { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Contact */
+  .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Footer */
+  footer {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 32px 24px;
+  }
+
+  /* Back to top */
+  #back-to-top { bottom: 24px; right: 24px; }
+}

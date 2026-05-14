@@ -1,0 +1,62 @@
+/* ─────────────────────────────────────────
+   ABOUT
+   ───────────────────────────────────────── */
+
+#about { border-top: 1px solid var(--border); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-heading {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 24px;
+}
+
+.about-heading em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(232, 232, 228, 0.25);
+}
+
+.about-text {
+  color: #888;
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.stat { background: var(--bg); padding: 24px; }
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
