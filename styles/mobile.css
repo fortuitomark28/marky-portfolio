@@ -50,6 +50,7 @@
   #back-to-top { bottom: 24px; right: 24px; }
 }
 @media (max-width: 768px) {
+     body { padding-top: 64px; }
   .projects-grid {
     display: flex;
     flex-direction: column;

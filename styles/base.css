@@ -21,6 +21,7 @@
 html { scroll-behavior: smooth; }
 
 body {
+padding-top: 72px;
   background: var(--bg);
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
