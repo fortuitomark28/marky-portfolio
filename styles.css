@@ -1055,3 +1055,16 @@ nav,
     padding-top: 64px;
   }
 }
+nav,
+#nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 10000 !important;
+  background: rgba(9, 9, 9, 0.97) !important;  /* was 0.92 */
+  border-bottom: 1px solid var(--border) !important;  /* always show border */
+}
+@media (min-width: 769px) {
+  .nav-links { display: flex !important; }
+}
