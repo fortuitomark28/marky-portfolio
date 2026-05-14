@@ -128,8 +128,58 @@
 
   <footer>
     <div class="footer-copy">© 2026 Mark Fortuito. All rights reserved.</div>
-    <div class="footer-tag">Built with <span>love</span> & vibe coding.</div>
+    <div class="footer-center">
+      Built with <span>love</span> & vibe coding.
+    </div>
+    <a href="https://github.com/fortuitomark28" target="_blank" class="footer-github">
+      github<span>↗</span>
+    </a>
   </footer>
+
+  <style>
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .footer-center {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .footer-center span { color: var(--accent); }
+    .footer-github {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-github span {
+      color: var(--accent);
+      margin-left: 2px;
+    }
+    .footer-github:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        padding: 32px 24px;
+      }
+    }
+  </style>
 
   <script>
     // ── Section loader ──
