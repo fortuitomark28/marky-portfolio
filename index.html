@@ -173,17 +173,32 @@
 
 @media (max-width: 768px) {
   nav {
-    z-index: 300;
+    position: fixed;
+    padding: 16px 20px;
+    z-index: 500;
+  }
+
+  .nav-links {
+    display: none !important;
   }
 
   .nav-burger {
     display: flex;
+    position: relative;
+    z-index: 501;
   }
 
   .mobile-menu {
     display: flex;
+    z-index: 400;
+    padding-top: 88px;
+  }
+
+  .mobile-menu-overlay {
+    z-index: 350;
   }
 }
+
     .mobile-menu-header {
       font-family: 'Space Mono', monospace;
       font-size: 10px;

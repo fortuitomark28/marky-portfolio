@@ -129,18 +129,21 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 300;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 24px 48px;
-  background: rgba(9, 9, 9, 0.7);
+  background: rgba(9, 9, 9, 0.75);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid transparent;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, background 0.3s;
 }
 
-nav.scrolled { border-color: var(--border); }
+nav.scrolled {
+  border-color: var(--border);
+  background: rgba(9, 9, 9, 0.92);
+}
 
 .nav-logo {
   font-family: 'Syne', sans-serif;
@@ -185,6 +188,7 @@ nav.scrolled { border-color: var(--border); }
 .nav-links a:hover::after { width: 100%; }
 
 #hero {
+  padding-top: 96px;
   min-height: 100vh;
   display: flex;
   align-items: flex-end;
