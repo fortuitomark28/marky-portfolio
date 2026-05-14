@@ -1,4 +1,3 @@
-
 #projects {
   border-top: 1px solid var(--border);
   background: var(--bg2);
@@ -62,6 +61,8 @@
   background: var(--glow);
   opacity: 0;
   transition: opacity 0.3s;
+  pointer-events: none; /* FIX: was blocking clicks on arrow */
+  z-index: 0;
 }
 
 .project-card:hover {
@@ -78,6 +79,8 @@
   color: var(--muted);
   letter-spacing: 0.1em;
   margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
 }
 
 .project-name {
@@ -88,6 +91,8 @@
   margin-bottom: 12px;
   color: var(--text);
   transition: color 0.3s;
+  position: relative;
+  z-index: 1;
 }
 
 .project-card:hover .project-name { color: var(--accent); }
@@ -97,12 +102,16 @@
   color: var(--muted);
   line-height: 1.7;
   margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
 }
 
 .project-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 2; /* above ::before overlay */
 }
 
 .project-lang {
@@ -123,6 +132,9 @@
   text-decoration: none;
   font-size: 14px;
   transition: all 0.3s;
+  position: relative;
+  z-index: 2; /* always on top */
+  cursor: pointer;
 }
 
 .project-card:hover .project-arrow {
