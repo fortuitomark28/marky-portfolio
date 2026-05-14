@@ -1,8 +1,4 @@
-/* ─────────────────────────────────────────
-   COMPONENTS — buttons, terminal, project-case
-   ───────────────────────────────────────── */
 
-/* ── Buttons ── */
 .btn {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
@@ -37,7 +33,6 @@
   color: var(--accent);
 }
 
-/* ── Terminal ── */
 .about-terminal {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -83,7 +78,6 @@
 .t-out    { color: #666; }
 .t-key    { color: var(--accent2); }
 
-/* ── Project case blocks ── */
 .project-case {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

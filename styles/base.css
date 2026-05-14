@@ -1,6 +1,3 @@
-/* ─────────────────────────────────────────
-   BASE — variables, reset, body, cursor, loader
-   ───────────────────────────────────────── */
 
 :root {
   --bg:      #090909;
@@ -35,13 +32,11 @@ body {
   animation: pageFadeIn 0.5s ease 0.1s forwards;
 }
 
-/* ── Scrollbar ── */
 ::-webkit-scrollbar       { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* ── Noise overlay ── */
 body::before {
   content: '';
   position: fixed;
@@ -52,7 +47,6 @@ body::before {
   opacity: 0.4;
 }
 
-/* ── Custom cursor ── */
 .cursor {
   position: fixed;
   width: 8px;
@@ -81,8 +75,6 @@ body::before {
 
 .cursor.hover      { transform: scale(3); }
 .cursor-ring.hover { width: 48px; height: 48px; border-color: var(--accent); }
-
-/* ── Loader ── */
 #loader {
   position: fixed;
   inset: 0;
@@ -128,7 +120,6 @@ body::before {
   animation: load 1.4s ease forwards;
 }
 
-/* ── Back to top ── */
 #back-to-top {
   position: fixed;
   bottom: 40px;
@@ -154,7 +145,6 @@ body::before {
 #back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
 #back-to-top:hover   { background: #fff; }
 
-/* ── Footer ── */
 footer {
   padding: 32px 48px;
   border-top: 1px solid var(--border);
@@ -178,7 +168,6 @@ footer {
 
 .footer-tag span { color: var(--accent); }
 
-/* ── Lightbox ── */
 #lightbox {
   display: none;
   position: fixed;
@@ -199,7 +188,6 @@ footer {
   border-radius: 8px;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
 }
-
 #lightbox-close {
   position: fixed;
   top: 20px;
@@ -212,8 +200,6 @@ footer {
   border: none;
   line-height: 1;
 }
-
-/* ── Reveal utility ── */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -221,8 +207,6 @@ footer {
 }
 
 .reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ── Section base ── */
 section { padding: 120px 48px; }
 
 .section-label {

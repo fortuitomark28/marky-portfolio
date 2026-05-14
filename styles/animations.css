@@ -1,6 +1,3 @@
-/* ─────────────────────────────────────────
-   ANIMATIONS — all @keyframes
-   ───────────────────────────────────────── */
 
 @keyframes pageFadeIn {
   from { opacity: 0; transform: translateY(8px); }
