@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="styles/animations.css">
   <link rel="stylesheet" href="styles/mobile.css">
 </head>
+<style>body { opacity: 0; }</style>
 <body>
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
@@ -241,9 +242,11 @@
 
       // ── Loader ──
       setTimeout(() => {
-        const loader = document.getElementById('loader');
-        if (loader) loader.classList.add('hidden');
-      }, 1600);
+  const loader = document.getElementById('loader');
+  if (loader) loader.classList.add('hidden');
+  document.body.style.transition = 'opacity 0.5s ease';
+  document.body.style.opacity = '1';
+}, 1000);
 
       // ── Back to top ──
       const backToTop = document.getElementById('back-to-top');

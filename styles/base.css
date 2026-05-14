@@ -19,7 +19,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden; /* moved here from body so fixed nav is never clipped */
+  overflow-x: hidden;
 }
 
 body {
@@ -29,10 +29,10 @@ body {
   font-family: 'DM Sans', sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  overflow-x: hidden; /* was "clip" — clip breaks position:fixed on mobile */
+  overflow-x: hidden;
   cursor: none;
-  opacity: 0;
-  animation: pageFadeIn 0.5s ease 0.1s forwards;
+  /* NO animation here — animating body creates a stacking context
+     that breaks position:fixed on every browser */
 }
 
 ::-webkit-scrollbar       { width: 4px; }
