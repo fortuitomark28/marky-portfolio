@@ -905,15 +905,20 @@ footer {
 }
 
 @media (max-width: 768px) {
-  nav { padding: 20px 24px; }
-  .nav-links { display: flex; gap: 12px; flex-wrap: wrap; }
-  .nav-links a { font-size: 10px; }
+  nav { padding: 16px 20px; }
+  .nav-links { display: none !important; }
   section { padding: 80px 24px; }
   #hero { padding: 0 24px 60px; }
   .hero-scroll { display: none; }
-  .hero-cta {
-    flex-direction: column;
-  }
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { width: 100%; text-align: center; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .projects-row-top,
+  .projects-row-mid,
+  .projects-row-bot { grid-template-columns: 1fr; }
+  .skills-layout { grid-template-columns: 1fr; gap: 40px; }
+  .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
   .hero-cta .btn {
     width: 100%;
     text-align: center;

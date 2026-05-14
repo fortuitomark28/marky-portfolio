@@ -99,8 +99,138 @@
     }
     #back-to-top:hover { background: #fff; }
 
+    /* ── Burger Button ── */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      background: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 201;
+      transition: border-color 0.2s;
+    }
+    .nav-burger:hover { border-color: #c8f135; }
+    .nav-burger span {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: #e8e8e4;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* ── Mobile Menu Overlay ── */
+    .mobile-menu-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 199;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .mobile-menu-overlay.open { opacity: 1; }
+
+    /* ── Mobile Menu Panel ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 75%;
+      max-width: 320px;
+      background: #090909;
+      border-left: 1px solid #1e1e1e;
+      z-index: 200;
+      flex-direction: column;
+      padding: 80px 32px 40px;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+
+    .mobile-menu-header {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #555;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #1e1e1e;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .mobile-nav-links li { border-bottom: 1px solid #1e1e1e; }
+    .mobile-nav-links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      text-decoration: none;
+      color: #e8e8e4;
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      transition: color 0.2s;
+    }
+    .mobile-nav-links a:hover { color: #c8f135; }
+    .mobile-nav-links .link-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #555;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      align-self: flex-start;
+      margin-top: 6px;
+    }
+    .mobile-nav-links .link-arrow {
+      font-size: 18px;
+      color: #555;
+      transition: all 0.2s;
+    }
+    .mobile-nav-links a:hover .link-arrow {
+      color: #c8f135;
+      transform: translate(4px, -4px);
+    }
+
+    .mobile-menu-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid #1e1e1e;
+    }
+    .mobile-menu-footer span {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: #555;
+      letter-spacing: 0.1em;
+    }
+
     @media (max-width: 768px) {
       #back-to-top { bottom: 24px; right: 24px; }
+      .nav-burger { display: flex; }
+      .mobile-menu { display: flex; }
+      .mobile-menu-overlay { display: block; }
     }
   </style>
 </head>
@@ -111,6 +241,7 @@
     <div class="loader-initials">M<span>F</span></div>
     <div class="loader-bar"></div>
   </div>
+
   <nav id="nav">
     <a href="#hero" class="nav-logo">mark<span>.</span>dev</a>
     <ul class="nav-links">
@@ -120,7 +251,62 @@
       <li><a href="#journey">Journey</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <span>MENU</span>
+      <span id="menuCount">— 01 / 05</span>
+    </div>
+    <ul class="mobile-nav-links">
+      <li>
+        <a href="#about" class="mobile-nav-link">
+          <span class="link-num">01</span>
+          About
+          <span class="link-arrow">↗</span>
+        </a>
+      </li>
+      <li>
+        <a href="#projects" class="mobile-nav-link">
+          <span class="link-num">02</span>
+          Projects
+          <span class="link-arrow">↗</span>
+        </a>
+      </li>
+      <li>
+        <a href="#skills" class="mobile-nav-link">
+          <span class="link-num">03</span>
+          Skills
+          <span class="link-arrow">↗</span>
+        </a>
+      </li>
+      <li>
+        <a href="#journey" class="mobile-nav-link">
+          <span class="link-num">04</span>
+          Journey
+          <span class="link-arrow">↗</span>
+        </a>
+      </li>
+      <li>
+        <a href="#contact" class="mobile-nav-link">
+          <span class="link-num">05</span>
+          Contact
+          <span class="link-arrow">↗</span>
+        </a>
+      </li>
+    </ul>
+    <div class="mobile-menu-footer">
+      <span>V2026.01</span>
+      <span>© 2026</span>
+    </div>
+  </div>
+
   <div id="lightbox">
     <button id="lightbox-close">✕</button>
     <img id="lightbox-img" src="" alt="Preview">
@@ -159,44 +345,48 @@
 
     function initScripts() {
 
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-document.documentElement.appendChild(cursor);
-document.documentElement.appendChild(ring);
+      const cursor = document.getElementById('cursor');
+      const ring = document.getElementById('cursorRing');
+      document.documentElement.appendChild(cursor);
+      document.documentElement.appendChild(ring);
 
-let mx = 0, my = 0, rx = 0, ry = 0;
+      let mx = 0, my = 0, rx = 0, ry = 0;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
-  cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
-});
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX;
+        my = e.clientY;
+        cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+      });
 
-(function animateRing() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
-  requestAnimationFrame(animateRing);
-})();
+      (function animateRing() {
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
+        requestAnimationFrame(animateRing);
+      })();
 
-function addCursorHover(selector) {
-  document.querySelectorAll(selector).forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
-    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
-  });
-}
-addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
+      function addCursorHover(selector) {
+        document.querySelectorAll(selector).forEach(el => {
+          el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+          el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+        });
+      }
+      addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
+
       setTimeout(() => {
         const loader = document.getElementById('loader');
         if (loader) loader.classList.add('hidden');
       }, 1600);
+
       const backToTop = document.getElementById('back-to-top');
       backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
       window.addEventListener('scroll', () => {
         document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
         backToTop.classList.toggle('visible', window.scrollY > 400);
         updateActiveNav();
       });
+
       function updateActiveNav() {
         const ids = ['hero', 'about', 'projects', 'skills', 'journey', 'contact'];
         const links = document.querySelectorAll('.nav-links a');
@@ -210,13 +400,14 @@ addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
         });
       }
       updateActiveNav();
+
       const observer = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
       }, { threshold: 0.1 });
       document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
+
       const filterBtns = document.querySelectorAll('.filter-btn');
       const projectCards = document.querySelectorAll('.project-card[data-type]');
-
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           filterBtns.forEach(b => b.classList.remove('active'));
@@ -228,6 +419,7 @@ addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
           });
         });
       });
+
       document.querySelectorAll('.project-carousel').forEach(carousel => {
         const track = carousel.querySelector('.carousel-track');
         const imgs  = track.querySelectorAll('img');
@@ -255,9 +447,9 @@ addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
           carousel.querySelector('.next').style.display = 'none';
         }
       });
+
       const lightbox    = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
-
       document.querySelectorAll('.carousel-track img').forEach(img => {
         img.style.cursor = 'zoom-in';
         img.addEventListener('click', () => {
@@ -265,10 +457,10 @@ addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
           lightbox.classList.add('open');
         });
       });
-
       document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
       lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
       document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+
       const repos = [
         'VOTING-MANAGEMENT-SYSTEM-2025','HealTapSystem','RECENT-SYSTEM-2026',
         'kanin','CRUD-PROJECT','ayessa_project','ayessa_valentines'
@@ -292,6 +484,57 @@ addCursorHover('a, button, .skill-tag, .project-card, .filter-btn');
           if (data.public_repos) document.getElementById('repoCount').textContent = data.public_repos;
         })
         .catch(() => {});
+
+      // ── Mobile Burger Menu ──
+      const burger      = document.getElementById('navBurger');
+      const mobileMenu  = document.getElementById('mobileMenu');
+      const menuOverlay = document.getElementById('menuOverlay');
+      const menuCount   = document.getElementById('menuCount');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+      const total       = mobileLinks.length;
+
+      let countInterval;
+      function animateCounter(target) {
+        let i = 1;
+        clearInterval(countInterval);
+        countInterval = setInterval(() => {
+          menuCount.textContent = `— 0${i} / 0${total}`;
+          i++;
+          if (i > target) clearInterval(countInterval);
+        }, 60);
+      }
+
+      function openMenu() {
+        burger.classList.add('open');
+        mobileMenu.classList.add('open');
+        menuOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        animateCounter(total);
+      }
+
+      function closeMenu() {
+        burger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        menuOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      burger.addEventListener('click', () => {
+        burger.classList.contains('open') ? closeMenu() : openMenu();
+      });
+      menuOverlay.addEventListener('click', closeMenu);
+
+      mobileLinks.forEach((link, i) => {
+        link.addEventListener('click', closeMenu);
+        link.addEventListener('mouseenter', () => {
+          menuCount.textContent = `— 0${i + 1} / 0${total}`;
+        });
+      });
+
+      // Close menu on Escape key
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeMenu();
+      });
     }
   </script>
 
