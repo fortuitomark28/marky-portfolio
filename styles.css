@@ -188,11 +188,10 @@ nav.scrolled {
 .nav-links a:hover::after { width: 100%; }
 
 #hero {
-  padding-top: 96px;
   min-height: 100vh;
   display: flex;
   align-items: flex-end;
-  padding: 0 48px 80px;
+  padding: 96px 48px 80px; 
   position: relative;
   overflow: clip;
 }
