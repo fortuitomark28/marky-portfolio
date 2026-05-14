@@ -110,7 +110,7 @@
       background: none;
       cursor: pointer;
       padding: 10px;
-      z-index: 201;
+      z-index: 100000;
       transition: border-color 0.2s;
     }
     .nav-burger:hover { border-color: #c8f135; }
@@ -224,11 +224,13 @@
     }
 
     @media (max-width: 768px) {
-      #back-to-top { bottom: 24px; right: 24px; }
-      .nav-burger { display: flex; }
-      .mobile-menu { display: flex; }
-      .mobile-menu-overlay { display: block; }
-    }
+  #back-to-top { bottom: 24px; right: 24px; }
+  .nav-burger { display: flex; }
+  .mobile-menu { display: flex; }
+  .mobile-menu-overlay { display: block; }
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; } 
+}
   </style>
 </head>
 <body>
